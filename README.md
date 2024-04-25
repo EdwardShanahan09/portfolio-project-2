@@ -25,4 +25,4 @@ The task list app allows users to create categories and add to-do items for each
 
 ### Site Map
 
-![](./readme-assets/site-map.png)
+<img src="./readme-assets/site-map.png" style="width:400px;"/>
