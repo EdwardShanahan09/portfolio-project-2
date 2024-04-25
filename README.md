@@ -5,21 +5,24 @@ My original project for my Full Stack Development Diploma was a Todo List, craft
 
 The task list app allows users to create categories and add to-do items for each specific task. The application is developed using React for the front end and Appwrite for the backend.
 
-## Contents 
+## Contents
+
 - [Design](#design)
+  - [ERD](#erd)
+  - [Site Map](#site-map)
 
 ## Design
 
 ### ERD
 
-| User       | Category | Task |
-| ----------- | ----------- | ----------- |
-| id (PK)     | id (PK)     | id (PK)     |
-| username    | name        | name        |
-| email       | user_id (FK)| status      |
-| password    |             | category_id (FK)  |
-|             |             | user_id (FK)|
+| User     | Category     | Task             |
+| -------- | ------------ | ---------------- |
+| id (PK)  | id (PK)      | id (PK)          |
+| username | name         | name             |
+| email    | user_id (FK) | status           |
+| password |              | category_id (FK) |
+|          |              | user_id (FK)     |
 
- 
+### Site Map
 
-
+![](./readme-assets/site-map.png)
