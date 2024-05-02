@@ -20,6 +20,7 @@ The task list app allows users to create categories and add to-do items for each
 | id (PK)  | id (PK)      | id (PK)          |
 | username | name         | name             |
 | email    | user_id (FK) | status           |
+|          |              | set_date         |
 | password |              | category_id (FK) |
 |          |              | user_id (FK)     |
 
