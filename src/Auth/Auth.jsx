@@ -9,10 +9,14 @@ const Auth = () => {
       {isAuthenticated ? (
         Navigate("/dashboard")
       ) : (
-        <>
-          <Hero />
-          <Outlet />
-        </>
+        <main className="grid md:grid-cols-2 h-screen">
+          <section className="flex flex-col justify-center items-center text-center">
+            <Hero />
+          </section>
+          <section className="flex flex-col justify-center items-center">
+            <Outlet />
+          </section>
+        </main>
       )}
     </>
   );
