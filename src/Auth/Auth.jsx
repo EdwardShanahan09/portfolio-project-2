@@ -1,10 +1,20 @@
 import Hero from "../Components/Hero/Hero";
+import { Outlet, Navigate } from "react-router-dom";
 
 const Auth = () => {
+  const isAuthenticated = false;
+
   return (
-    <div>
-      <Hero />
-    </div>
+    <>
+      {isAuthenticated ? (
+        Navigate("/dashboard")
+      ) : (
+        <>
+          <Hero />
+          <Outlet />
+        </>
+      )}
+    </>
   );
 };
 
