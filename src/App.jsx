@@ -9,8 +9,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Auth />}>
-          <Route path="/" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
+          <Route index element={<SignUp />} />
+          <Route path="login" element={<Login />} />
         </Route>
       </Routes>
     </>

@@ -12,7 +12,7 @@ const SignUp = () => {
           </label>
 
           <input
-            className="block w-full"
+            className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
             id="name"
             name="name"
             type="text"
@@ -26,7 +26,7 @@ const SignUp = () => {
           </label>
 
           <input
-            className="block w-full"
+            className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
             id="email"
             name="email"
             type="email"
@@ -43,17 +43,22 @@ const SignUp = () => {
           </label>
 
           <input
-            className="block w-full"
+            className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
             id="password"
             name="password"
             type="password"
           />
         </div>
-        <button>Submit</button>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Submit
+        </button>
       </form>
 
-      <p className="flex  justify-end items-center">
-        Have an account? <Link to="/login">Login</Link>
+      <p className="flex justify-end items-center">
+        Have an account?{" "}
+        <Link to="/login" className="text-secondary ml-1">
+          LOGIN
+        </Link>
       </p>
     </div>
   );
