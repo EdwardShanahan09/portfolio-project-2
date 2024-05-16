@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
-import { signInWithGoogle } from "../../lib/firebase/firebase";
+import {
+  createUserDocument,
+  signInWithGoogle,
+} from "../../lib/firebase/firebase";
 
 const SignUp = () => {
   const handleGoogleSignIn = async () => {
-    const response = await signInWithGoogle();
+    const { user } = await signInWithGoogle();
 
-    console.log(response);
+    const userDocRef = await createUserDocument(user);
   };
+
+  const handleSubmit = async () => {};
   return (
     <div className="text-dark">
       <h2 className="text-4xl font-bold mb-4 text-dark">Create an account</h2>
@@ -51,6 +56,22 @@ const SignUp = () => {
           <input
             className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
             id="password"
+            name="password"
+            type="password"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label
+            className="font-bold block text-sm mb-2 border-solid"
+            htmlFor="confirmPassword"
+          >
+            Confirm Password:
+          </label>
+
+          <input
+            className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
+            id="confirmPassword"
             name="password"
             type="password"
           />
