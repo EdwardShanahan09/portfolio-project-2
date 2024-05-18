@@ -5,6 +5,7 @@ import {
   createUserDocument,
   signInWithGoogle,
 } from "../../lib/firebase/firebase";
+import InputField from "../../Components/InputField/InputField";
 
 const defaultFormFields = {
   displayName: "",
@@ -59,7 +60,7 @@ const SignUp = () => {
   const handleGoogleSignIn = async () => {
     const { user } = await signInWithGoogle();
 
-    const userDocRef = await createUserDocument(user);
+    await createUserDocument(user);
   };
 
   return (
@@ -67,73 +68,43 @@ const SignUp = () => {
       <h2 className="text-4xl font-bold mb-4 text-dark">Create an account</h2>
 
       <form onSubmit={handleSubmit} className="mb-4">
-        <div className="mb-4">
-          <label className="font-bold block text-sm mb-2" htmlFor="name">
-            Name:
-          </label>
+        <InputField
+          labelName="Name"
+          labelId="name"
+          name="displayName"
+          type="text"
+          placeholder="John Doe"
+          value={displayName}
+          onChange={handleChange}
+        />
 
-          <input
-            className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
-            id="name"
-            name="displayName"
-            type="text"
-            placeholder="John Doe"
-            value={displayName}
-            onChange={handleChange}
-          />
-        </div>
+        <InputField
+          labelName="Email"
+          labelId="email"
+          name="email"
+          type="email"
+          placeholder="example@email.com"
+          value={email}
+          onChange={handleChange}
+        />
 
-        <div className="mb-4">
-          <label className="font-bold block text-sm mb-2" htmlFor="email">
-            Email:
-          </label>
+        <InputField
+          labelName="Password"
+          labelId="password"
+          name="password"
+          type="password"
+          value={password}
+          onChange={handleChange}
+        />
 
-          <input
-            className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
-            id="email"
-            name="email"
-            type="email"
-            placeholder="example@email.com"
-            value={email}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="mb-4">
-          <label
-            className="font-bold block text-sm mb-2 border-solid"
-            htmlFor="password"
-          >
-            Password:
-          </label>
-
-          <input
-            className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
-            id="password"
-            name="password"
-            type="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="mb-4">
-          <label
-            className="font-bold block text-sm mb-2 border-solid"
-            htmlFor="confirmPassword"
-          >
-            Confirm Password:
-          </label>
-
-          <input
-            className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            value={confirmPassword}
-            onChange={handleChange}
-          />
-        </div>
+        <InputField
+          labelName="Confirm Password"
+          labelId="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          value={confirmPassword}
+          onChange={handleChange}
+        />
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Submit
         </button>
