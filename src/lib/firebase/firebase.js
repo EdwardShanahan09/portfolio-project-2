@@ -26,7 +26,6 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
-
 export const db = getFirestore();
 
 export const createUserDocument = async (userAuth, info = {}) => {

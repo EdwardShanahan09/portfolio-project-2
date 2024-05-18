@@ -1,22 +1,72 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
+  createAuthUserWithEmailAndPassword,
   createUserDocument,
   signInWithGoogle,
 } from "../../lib/firebase/firebase";
 
+const defaultFormFields = {
+  displayName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
 const SignUp = () => {
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const { displayName, email, password, confirmPassword } = formFields;
+
+  const resetFormFileds = () => {
+    setFormFields(defaultFormFields);
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormFields({ ...formFields, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("Password do not match");
+
+      return;
+    }
+
+    try {
+      const { user } = await createAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      await createUserDocument(user, { displayName });
+
+      resetFormFileds();
+
+      alert("Good!");
+    } catch (error) {
+      if (error.code === "auth/email-already-in-use") {
+        alert("Cannot cresate user, email already in use");
+      } else {
+        console.log("User creation encountered an error", error);
+      }
+    }
+  };
+
   const handleGoogleSignIn = async () => {
     const { user } = await signInWithGoogle();
 
     const userDocRef = await createUserDocument(user);
   };
 
-  const handleSubmit = async () => {};
   return (
     <div className="text-dark">
       <h2 className="text-4xl font-bold mb-4 text-dark">Create an account</h2>
 
-      <form className="mb-4">
+      <form onSubmit={handleSubmit} className="mb-4">
         <div className="mb-4">
           <label className="font-bold block text-sm mb-2" htmlFor="name">
             Name:
@@ -25,9 +75,11 @@ const SignUp = () => {
           <input
             className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
             id="name"
-            name="name"
+            name="displayName"
             type="text"
             placeholder="John Doe"
+            value={displayName}
+            onChange={handleChange}
           />
         </div>
 
@@ -42,6 +94,8 @@ const SignUp = () => {
             name="email"
             type="email"
             placeholder="example@email.com"
+            value={email}
+            onChange={handleChange}
           />
         </div>
 
@@ -58,6 +112,8 @@ const SignUp = () => {
             id="password"
             name="password"
             type="password"
+            value={password}
+            onChange={handleChange}
           />
         </div>
 
@@ -72,8 +128,10 @@ const SignUp = () => {
           <input
             className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
             id="confirmPassword"
-            name="password"
+            name="confirmPassword"
             type="password"
+            value={confirmPassword}
+            onChange={handleChange}
           />
         </div>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
