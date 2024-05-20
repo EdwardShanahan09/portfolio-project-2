@@ -9,6 +9,7 @@ const InputField = ({ labelName, labelId, ...otherProps }) => {
         id={labelId}
         className="block w-full border border-gray-300 rounded-md px-4 py-2 focus:border-secondary focus:ring-secondary"
         {...otherProps}
+        required
       />
     </div>
   );

@@ -16,15 +16,15 @@ const defaultFormFields = {
 
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
+  const [errorMessage, setErrorMessage] = useState("");
   const { displayName, email, password, confirmPassword } = formFields;
 
-  const resetFormFileds = () => {
+  const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormFields({ ...formFields, [name]: value });
   };
 
@@ -32,8 +32,7 @@ const SignUp = () => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Password do not match");
-
+      setErrorMessage("Passwords do not match.");
       return;
     }
 
@@ -42,25 +41,27 @@ const SignUp = () => {
         email,
         password
       );
-
       await createUserDocument(user, { displayName });
-
-      resetFormFileds();
-
-      alert("Good!");
+      resetFormFields();
+      setErrorMessage("");
+      alert("User created successfully!");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        alert("Cannot cresate user, email already in use");
+        setErrorMessage("Cannot create user, email already in use.");
       } else {
-        console.log("User creation encountered an error", error);
+        setErrorMessage("User creation encountered an error: " + error.message);
       }
     }
   };
 
   const handleGoogleSignIn = async () => {
-    const { user } = await signInWithGoogle();
-
-    await createUserDocument(user);
+    try {
+      const { user } = await signInWithGoogle();
+      await createUserDocument(user);
+      setErrorMessage("");
+    } catch (error) {
+      setErrorMessage("Google sign-in encountered an error: " + error.message);
+    }
   };
 
   return (
@@ -109,6 +110,8 @@ const SignUp = () => {
           Submit
         </button>
       </form>
+
+      {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
 
       <p className="flex justify-end items-center">
         Have an account?{" "}
