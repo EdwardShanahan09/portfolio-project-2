@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocument,
   signInWithGoogle,
 } from "../../lib/firebase/firebase";
 import InputField from "../../Components/InputField/InputField";
+import { UserContext } from "../../Context/User/UserContext";
 
 const defaultFormFields = {
   displayName: "",
@@ -18,6 +19,8 @@ const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [errorMessage, setErrorMessage] = useState("");
   const { displayName, email, password, confirmPassword } = formFields;
+  const { setCurrentContext } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -41,6 +44,11 @@ const SignUp = () => {
         email,
         password
       );
+
+      setCurrentContext(user);
+
+      navigate("/dashboard");
+
       await createUserDocument(user, { displayName });
       resetFormFields();
       setErrorMessage("");

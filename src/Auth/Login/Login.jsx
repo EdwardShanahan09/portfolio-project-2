@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   loginWithEmailAndPassword,
@@ -6,6 +7,7 @@ import {
   signInWithGoogle,
 } from "../../lib/firebase/firebase";
 import InputField from "../../Components/InputField/InputField";
+import { UserContext } from "../../Context/User/UserContext";
 
 const defaultFormFields = {
   email: "",
@@ -16,6 +18,8 @@ const Login = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
   const [error, setError] = useState(null);
+  const { setCurrentUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -31,7 +35,12 @@ const Login = () => {
     setError(null); // Reset the error message before a new attempt
 
     try {
-      await loginWithEmailAndPassword(email, password);
+      const { user } = await loginWithEmailAndPassword(email, password);
+
+      setCurrentUser(user);
+
+      navigate("/dashboard");
+
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/wrong-password") {
