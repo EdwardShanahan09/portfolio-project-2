@@ -19,7 +19,7 @@ const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [errorMessage, setErrorMessage] = useState("");
   const { displayName, email, password, confirmPassword } = formFields;
-  const { setCurrentContext } = useContext(UserContext);
+  const { setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const resetFormFields = () => {
@@ -45,13 +45,14 @@ const SignUp = () => {
         password
       );
 
-      setCurrentContext(user);
+      setCurrentUser(user);
 
       navigate("/dashboard");
 
       await createUserDocument(user, { displayName });
+
       resetFormFields();
-      setErrorMessage("");
+
       alert("User created successfully!");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
