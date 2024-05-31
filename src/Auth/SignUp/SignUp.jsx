@@ -75,7 +75,7 @@ const SignUp = () => {
 
   return (
     <div className="text-dark">
-      <h2 className="text-4xl font-bold mb-4 text-dark">Create an account</h2>
+      <h2 className="text-2xl font-bold mb-4 text-dark">Sign Up</h2>
 
       <form onSubmit={handleSubmit} className="mb-4">
         <InputField

@@ -14,12 +14,17 @@ const Auth = () => {
       {isAuthenticated ? (
         <Navigate to="/dashboard" />
       ) : (
-        <main className="grid md:grid-cols-2 h-screen">
-          <section className="flex flex-col justify-center items-center text-center">
+        <main className="grid md:grid-cols-1 lg:grid-cols-2 h-screen">
+          <section className="flex flex-col justify-center p-10">
             <Hero />
-          </section>
-          <section className="flex flex-col justify-center items-center">
             <Outlet />
+          </section>
+          <section className="h-screen sm:hidden lg:block">
+            <img
+              src="https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              alt=""
+              className="h-screen object-cover"
+            />
           </section>
         </main>
       )}

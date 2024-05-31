@@ -2,8 +2,8 @@ import LogoDark from "../../assets/icons/logo-dark.svg";
 
 const Hero = () => {
   return (
-    <div className="font-regular">
-      <div className="flex justify-center items-center">
+    <div className="font-regular text-center mb-8">
+      <div className="flex justify-center items-center ">
         <img className="mb-8" src={LogoDark} alt="My Task List Logo" />
       </div>
 
