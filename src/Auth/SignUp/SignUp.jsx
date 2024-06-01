@@ -64,7 +64,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="text-dark">
+    <div className="text-dark w-4/6">
       <h2 className="text-2xl font-bold mb-4 text-dark">Sign Up</h2>
 
       <form onSubmit={handleSubmit} className="mb-4">

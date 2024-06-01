@@ -28,7 +28,7 @@ const GoogleSignIn = () => {
   };
   return (
     <div className="flex justify-center items-center flex-col mt-8 mb-8">
-      <p className="mb-4">Or sign up with:</p>
+      <p className="mb-4">Or sign in with:</p>
       <svg
         className="cursor-pointer"
         onClick={handleGoogleSignIn}
