@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import Hero from "../Components/Hero/Hero";
+import GoogleSignIn from "../Components/GoogleSignIn/GoogleSignIn";
 import { Outlet, Navigate } from "react-router-dom";
 import { UserContext } from "../Context/User/UserContext";
 
@@ -18,6 +19,7 @@ const Auth = () => {
           <section className="flex flex-col justify-center p-10">
             <Hero />
             <Outlet />
+            <GoogleSignIn />
           </section>
           <section className="h-screen sm:hidden lg:block">
             <img
