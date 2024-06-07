@@ -1,11 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import {
-  loginWithEmailAndPassword,
-  createUserDocument,
-  signInWithGoogle,
-} from "../../lib/firebase/firebase";
+import { loginWithEmailAndPassword } from "../../lib/firebase/firebase";
 import InputField from "../../Components/InputField/InputField";
 import { UserContext } from "../../Context/User/UserContext";
 
@@ -17,7 +13,7 @@ const defaultFormFields = {
 const Login = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  const [error, setError] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const { setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -32,7 +28,6 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(null); // Reset the error message before a new attempt
 
     try {
       const { user } = await loginWithEmailAndPassword(email, password);
@@ -43,29 +38,19 @@ const Login = () => {
 
       resetFormFields();
     } catch (error) {
-      if (error.code === "auth/wrong-password") {
-        setError("Incorrect password. Please try again.");
-      } else if (error.code === "auth/user-not-found") {
-        setError("No user found with this email. Please sign up first.");
+      console.log(error);
+      if (error.code === "auth/invalid-credential") {
+        setErrorMessage("Incorrect email or password. Please try again.");
       } else {
-        setError("Login failed. Please try again.");
+        setErrorMessage("Login failed. Please try again.");
       }
-    }
-  };
-
-  const handleGoogleSignIn = async () => {
-    try {
-      const { user } = await signInWithGoogle();
-      await createUserDocument(user);
-    } catch (error) {
-      setError("Google sign-in failed. Please try again.");
     }
   };
 
   return (
     <div className="text-dark w-4/6">
       <h2 className="text-2xl font-bold mb-4 text-dark">Login</h2>
-      {error && <p className="text-red-500">{error}</p>}
+
       <form onSubmit={handleSubmit} className="mb-4">
         <InputField
           labelName="Email"
@@ -88,6 +73,8 @@ const Login = () => {
           Submit
         </button>
       </form>
+
+      {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
       <p className="flex justify-end items-center">
         Don't have an account?{" "}
         <Link to="/" className="text-secondary ml-1">

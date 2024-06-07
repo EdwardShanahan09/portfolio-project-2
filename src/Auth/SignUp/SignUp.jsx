@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocument,
-  signInWithGoogle,
 } from "../../lib/firebase/firebase";
 import InputField from "../../Components/InputField/InputField";
 import { UserContext } from "../../Context/User/UserContext";
@@ -57,6 +56,8 @@ const SignUp = () => {
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         setErrorMessage("Cannot create user, email already in use.");
+      } else if (error.code === "auth/weak-password") {
+        setErrorMessage("Password should be at least 6 characters.");
       } else {
         setErrorMessage("User creation encountered an error: " + error.message);
       }
