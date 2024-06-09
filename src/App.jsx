@@ -7,6 +7,7 @@ import RootLayout from "./Root/RootLayout";
 import Profile from "./Root/Profile/Profile";
 import Tasks from "./Root/Tasks/Tasks";
 import TodayTasks from "./Root/TodayTasks/TodayTasks";
+import AllTodos from "./Root/AllTodos/AllTodos";
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
 
         <Route path="/dashboard" element={<RootLayout />}>
           <Route path="profile" element={<Profile />} />
-          <Route path="todays-taks" element={<TodayTasks />} />
+          <Route path="today-tasks" element={<TodayTasks />} />
+          <Route path="all-todos" element={<AllTodos />} />
           <Route path="tasks" element={<Tasks />} />
         </Route>
       </Routes>

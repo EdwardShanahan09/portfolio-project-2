@@ -1,5 +1,5 @@
 const TodoTasks = () => {
-  return <div>Todo Tasks</div>;
+  return <div>Today's Tasks</div>;
 };
 
 export default TodoTasks;
