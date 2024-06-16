@@ -34,7 +34,7 @@ const Login = () => {
 
       setCurrentUser(user);
 
-      navigate("/dashboard");
+      navigate("/dashboard/tasks");
 
       resetFormFields();
     } catch (error) {

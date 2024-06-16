@@ -1,16 +1,31 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../Context/User/UserContext";
+import { Link, useNavigate } from "react-router-dom";
 import ProfileIcon from "../../assets/icons/profile-icon.svg";
 import TodaysTasksIcon from "../../assets/icons/todays-icon.svg";
 import AllTodosIcon from "../../assets/icons/all-todos-icon.svg";
 import TasksIcon from "../../assets/icons/tasks-icon.svg";
 import SignOutIcon from "../../assets/icons/sign-out-icon.svg";
+import { signOutUser } from "../../lib/firebase/firebase";
 
 const Navigation = () => {
+  const { currentUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+      await signOutUser();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <nav className="navbar h-full bg-dark flex lg:flex-col items-center justify-between p-6 lg:px-0">
       <Link to="profile" className="flex flex-col items-center">
         <img className="w-6 lg:w-8 mb-2" src={ProfileIcon} alt="Profile Icon" />
-        <p className="text-light hidden lg:inline ml-2">John Doe</p>
+        <p className="text-light hidden lg:inline ml-2"></p>
       </Link>
 
       <ul className="navbar__list flex lg:flex-col mt-4 space-x-4 lg:space-x-0 lg:space-y-4">
@@ -45,7 +60,10 @@ const Navigation = () => {
         </li>
       </ul>
 
-      <div className="navbar__button flex items-center mt-4">
+      <div
+        onClick={handleSignOut}
+        className="navbar__button flex items-center mt-4"
+      >
         <img className="w-6" src={SignOutIcon} alt="Sign Out Icon" />
         <span className="text-light hidden lg:inline ml-2">Sign Out</span>
       </div>
