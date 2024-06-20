@@ -4,12 +4,15 @@ import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./Context/User/UserContext.jsx";
+import { DbProvider } from "./Context/Db/DbContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <DbProvider>
+          <App />
+        </DbProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
