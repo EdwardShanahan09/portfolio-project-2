@@ -1,8 +1,8 @@
 import { useState } from "react";
 import PlusIcon from "../../assets/icons/PlusIcon.svg";
-import CreateTaskModal from "../CreateTaskModel/CreateTaskModel";
+import CreateCategoryModal from "../CreateCategoryModel/CreateCategoryModel";
 
-const CreateTaskBox = () => {
+const CreateCategoryBox = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
 
   const handleOpenModel = () => setIsModelOpen(true);
@@ -14,9 +14,9 @@ const CreateTaskBox = () => {
         <img src={PlusIcon} alt="Plus Icon" />
       </div>
 
-      <p className="text-sm">New Task</p>
+      <p className="text-sm">New Category</p>
 
-      <CreateTaskModal
+      <CreateCategoryModal
         isOpen={isModelOpen}
         onClose={handleCloseModel}
         onCreate={""}
@@ -25,4 +25,4 @@ const CreateTaskBox = () => {
   );
 };
 
-export default CreateTaskBox;
+export default CreateCategoryBox;

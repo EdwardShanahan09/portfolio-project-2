@@ -2,21 +2,21 @@
 import { useState, useContext } from "react";
 import { DbContext } from "../../Context/Db/DbContext";
 
-const CreateTaskModal = ({ isOpen, onClose, onCreate }) => {
-  const [taskName, setTaskName] = useState("");
-  const { addTask } = useContext(DbContext);
+const CreateCategoryModal = ({ isOpen, onClose, onCreate }) => {
+  const [categoryName, setCategoryName] = useState("");
+  const { addCategory } = useContext(DbContext);
 
   const handleCreate = async () => {
-    const newTask = {
-      name: taskName,
+    const newCategory = {
+      categories: categoryName,
       createdAt: new Date(),
     };
 
-    const taskId = await addTask(newTask);
+    const categoryId = await addCategory(newCategory);
 
-    if (taskId) {
-      onCreate(taskName);
-      setTaskName("");
+    if (categoryId) {
+      onCreate(categoryName);
+      setCategoryName("");
       onClose();
     } else {
       console.log("Error");
@@ -28,13 +28,13 @@ const CreateTaskModal = ({ isOpen, onClose, onCreate }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl mb-4">Create New Task</h2>
+        <h2 className="text-2xl mb-4">Create New Category</h2>
         <input
           type="text"
           className="w-full p-2 border border-gray-300 rounded mb-4"
-          placeholder="Task Name"
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
+          placeholder="Category Name"
+          value={categoryName}
+          onChange={(e) => setCategoryName(e.target.value)}
         />
         <div className="flex justify-end">
           <button
@@ -55,4 +55,4 @@ const CreateTaskModal = ({ isOpen, onClose, onCreate }) => {
   );
 };
 
-export default CreateTaskModal;
+export default CreateCategoryModal;

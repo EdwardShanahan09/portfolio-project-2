@@ -5,7 +5,7 @@ import SignUp from "./Auth/SignUp/SignUp";
 import Login from "./Auth/Login/Login";
 import RootLayout from "./Root/RootLayout";
 import Profile from "./Root/Profile/Profile";
-import Tasks from "./Root/Tasks/Tasks";
+import Categories from "./Root/Categories/Categories";
 import TodayTasks from "./Root/TodayTasks/TodayTasks";
 import AllTodos from "./Root/AllTodos/AllTodos";
 import { useContext } from "react";
@@ -32,7 +32,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="today-tasks" element={<TodayTasks />} />
           <Route path="all-todos" element={<AllTodos />} />
-          <Route index path="tasks" element={<Tasks />} />
+          <Route index path="categories" element={<Categories />} />
         </Route>
       </Routes>
     </>

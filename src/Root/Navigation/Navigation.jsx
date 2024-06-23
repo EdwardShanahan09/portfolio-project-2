@@ -69,10 +69,10 @@ const Navigation = () => {
         <li>
           <Link
             className="flex items-center hover:bg-black p-2 rounded lg:w-full"
-            to="tasks"
+            to="categories"
           >
             <img className="w-6" src={TasksIcon} alt="Tasks Icon" />
-            <span className="text-light hidden lg:inline ml-2">Tasks</span>
+            <span className="text-light hidden lg:inline ml-2">Categories</span>
           </Link>
         </li>
       </ul>

@@ -14,15 +14,15 @@ import {
 // Create the DbContext
 export const DbContext = createContext({
   getUserDisplayName: () => null,
-  addTask: () => null,
+  addCategory: () => null,
 });
 
 // DbProvider component
 export const DbProvider = ({ children }) => {
-  const addTask = async (task) => {
+  const addCategory = async (category) => {
     try {
-      const taskCollection = collection(db, "tasks");
-      const docRef = addDoc(taskCollection, task);
+      const categoryCollection = collection(db, "categories");
+      const docRef = addDoc(categoryCollection, category);
       return docRef.id;
     } catch (error) {
       console.log(error);
@@ -48,7 +48,7 @@ export const DbProvider = ({ children }) => {
 
   const value = {
     getUserDisplayName,
-    addTask,
+    addCategory,
   };
 
   return <DbContext.Provider value={value}>{children}</DbContext.Provider>;

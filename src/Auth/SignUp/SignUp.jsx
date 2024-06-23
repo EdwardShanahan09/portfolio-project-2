@@ -46,7 +46,7 @@ const SignUp = () => {
 
       setCurrentUser(user);
 
-      navigate("/dashboard/tasks");
+      navigate("/dashboard/categories");
 
       await createUserDocument(user, { displayName });
 
