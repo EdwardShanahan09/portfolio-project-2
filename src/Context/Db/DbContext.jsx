@@ -19,17 +19,18 @@ export const DbContext = createContext({
 
 // DbProvider component
 export const DbProvider = ({ children }) => {
-  const addCategory = async (category) => {
+  const addCategory = async (userId, category) => {
     try {
-      const categoryCollection = collection(db, "categories");
-      const docRef = addDoc(categoryCollection, category);
+      const categoryCollection = collection(db, "users", userId, "categories");
+      const docRef = await addDoc(categoryCollection, category);
+      console.log("Category added with ID: ", docRef.id);
       return docRef.id;
     } catch (error) {
-      console.log(error);
-
+      console.error("Error adding category: ", error);
       return null;
     }
   };
+
   const getUserDisplayName = async (userId) => {
     try {
       const userDoc = doc(db, "users", userId);

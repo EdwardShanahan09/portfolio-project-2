@@ -4,9 +4,15 @@ import CreateCategoryModal from "../CreateCategoryModel/CreateCategoryModel";
 
 const CreateCategoryBox = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const handleOpenModel = () => setIsModelOpen(true);
   const handleCloseModel = () => setIsModelOpen(false);
+
+  const handleCreateCategory = (categoryName) => {
+    setCategories([...categories, categoryName]);
+    console.log(`Category created: ${categoryName}`);
+  };
 
   return (
     <div>
@@ -19,7 +25,7 @@ const CreateCategoryBox = () => {
       <CreateCategoryModal
         isOpen={isModelOpen}
         onClose={handleCloseModel}
-        onCreate={""}
+        onCreate={handleCreateCategory}
       />
     </div>
   );
