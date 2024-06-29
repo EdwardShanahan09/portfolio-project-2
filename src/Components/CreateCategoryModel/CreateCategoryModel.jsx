@@ -2,11 +2,13 @@
 import { useState, useContext } from "react";
 import { DbContext } from "../../Context/Db/DbContext";
 import { UserContext } from "../../Context/User/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const CreateCategoryModal = ({ isOpen, onClose, onCreate }) => {
   const [categoryName, setCategoryName] = useState("");
   const { currentUser } = useContext(UserContext);
   const { addCategory } = useContext(DbContext);
+  const navigate = useNavigate();
 
   const handleCreate = async () => {
     if (!currentUser) {
@@ -25,6 +27,7 @@ const CreateCategoryModal = ({ isOpen, onClose, onCreate }) => {
         onCreate(categoryName);
         setCategoryName("");
         onClose();
+        navigate(`/dashboard/category/${categoryId}`);
       } else {
         console.log("Error creating category");
       }

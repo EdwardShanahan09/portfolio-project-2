@@ -8,6 +8,7 @@ import Profile from "./Root/Profile/Profile";
 import Categories from "./Root/Categories/Categories";
 import TodayTasks from "./Root/TodayTasks/TodayTasks";
 import AllTodos from "./Root/AllTodos/AllTodos";
+import CategoryPage from "./Components/CategoryPage";
 import { useContext } from "react";
 import { UserContext } from "./Context/User/UserContext";
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="today-tasks" element={<TodayTasks />} />
           <Route path="all-todos" element={<AllTodos />} />
           <Route index path="categories" element={<Categories />} />
+          <Route path="category/:id" element={<CategoryPage />} />
         </Route>
       </Routes>
     </>
